@@ -5,6 +5,7 @@ import { TopBarComponent } from './shell/top-bar/top-bar.component';
 import { MainContentComponent } from './shell/main-content/main-content.component';
 import { FooterComponent } from './shell/footer/footer.component';
 
+
 @NgModule({
   imports: [
     CommonModule
