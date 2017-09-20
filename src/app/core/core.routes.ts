@@ -1,12 +1,10 @@
+import { RouterModule, Routes } from '@angular/router';
 
+const routes: Routes = [
+    { path: 'home', loadChildren: './../home/home.module#HomeModule' },
+    { path: 'login', loadChildren: './../login/login.module#LoginModule' },
+    { path: 'register', loadChildren: './../register/register.module#RegisterModule' },
+    { path: '**', pathMatch: 'full', redirectTo: 'home' }
+];
 
-// const APP_ROUTES: Routes = [
-//     { path: 'home', component: HomeComponent },
-//     { path: 'about', component: AboutComponent },
-//     { path: 'contact', component: ContactComponent },
-//     { path: 'register', component: RegisterComponent },
-//     { path: 'login', component: LoginComponent },
-//     { path: '**', pathMatch: 'full', redirectTo: 'home' }
-// ];
-
-// export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES, { useHash: true });
+export const APP_ROUTING = RouterModule.forRoot(routes);
