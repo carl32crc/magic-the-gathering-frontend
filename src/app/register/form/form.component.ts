@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { passwordMatcher } from './validation/password_matcher';
-import { User } from '../../models/user.interface';
+import { User } from '../models/user.interface';
 
 @Component({
   selector: 'mtg-form',
