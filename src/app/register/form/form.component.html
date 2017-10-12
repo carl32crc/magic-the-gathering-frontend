@@ -1,65 +1,68 @@
 
 <form novalidate [formGroup]="user" (ngSubmit)="saveData(user)">
 
-  <div class="form-group" [ngClass]="{'has-danger': !user.get('name').touched && 
-                                                     user.get('name').hasError('required') }">
-    <label class="col-form-label">Nombre:</label>
-    <input type="text" 
+  <div class="form-group">
+    <label class="form-control-label">Nombre</label>
+    <input  type="text" 
             name="name"
             formControlName="name" 
-            class="form-control" required/>
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('name').required }" required/>
     <div *ngIf="formTools.mustShowErrors('name').required"
-    class="form-control-feedback">Este campo es requerido.</div>
+    class="invalid-feedback">Este campo es requerido.</div>
   </div>
 
-  <div class="form-group" [ngClass]="{'has-danger': !user.get('surname').touched && 
-                                                     user.get('surname').hasError('required') }">
-    <label class="col-form-label">Apellidos:</label>
-    <input type="text" 
-            name="surname" 
-            formControlName="surname"
-            class="form-control" required/>
+  <div class="form-group">
+    <label class="form-control-label">Apellidos:</label>
+    <input  type="text" 
+            name="surname"
+            formControlName="surname" 
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('surname').required }" required/>
     <div *ngIf="formTools.mustShowErrors('surname').required"
-    class="form-control-feedback">Este campo es requerido.</div>
+    class="invalid-feedback">Este campo es requerido.</div>
   </div>
 
-  <div class="form-group" [ngClass]="{'has-danger': !user.get('email').touched && 
-                                                     user.get('email').hasError('required') }">
-    <label class="col-form-label">Correo Electrónico:</label>
-    <input type="email" 
+  <div class="form-group">
+    <label class="form-control-label">Email:</label>
+    <input  type="text" 
             name="email"
             formControlName="email" 
-            class="form-control" required/>
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('email').required || 
+                                      formTools.mustShowErrors('email').pattern }" required/>
     <div *ngIf="formTools.mustShowErrors('email').required"
-    class="form-control-feedback">Este campo es requerido.</div>
+    class="invalid-feedback">Este campo es requerido.</div>
     <div *ngIf="formTools.mustShowErrors('email').pattern"
-    class="form-control-feedback">El email no es valido</div>
+    class="invalid-feedback">El email no es valido.</div>
   </div>
 
-  <div class="form-group" [ngClass]="{'has-danger': !user.get('password').touched && 
-                                                     user.get('password').hasError('required') || 
-                                                     user.get('password').hasError('minlength') }">
-    <label class="col-form-label">Password:</label>
-    <input type="password" 
-          name="password"
-          formControlName="password" 
-          class="form-control" required/>
+  <div class="form-group">
+    <label class="form-control-label">Password:</label>
+    <input  type="password" 
+            name="password"
+            formControlName="password" 
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('password').required || 
+                                      formTools.mustShowErrors('password').minLength }" required/>
     <div *ngIf="formTools.mustShowErrors('password').required"
-    class="form-control-feedback">Este campo es requerido.</div>
+    class="invalid-feedback">Este campo es requerido.</div>
     <div *ngIf="formTools.mustShowErrors('password').minLength"
-    class="form-control-feedback">Este campo tiene que tener 3 caracteres como minimo.</div>
+    class="invalid-feedback">Este campo tiene que tener 3 caracteres como minimo.</div>
   </div>
 
-  <div class="form-group" [ngClass]="{'has-danger': !user.get('checkPassword').touched && 
-                                                     user.get('checkPassword').hasError('required') }">
-    <label class="col-form-label">Escribe de nuevo el password:</label>
-    <input type="password" 
-          name="checkPassword"
-          formControlName="checkPassword" 
-          class="form-control" required/>
-    <div class="error" *ngIf="user.touched && user.hasError('nomatch')">
-      Los passwords no coinciden.
-    </div>
+  <div class="form-group">
+    <label class="form-control-label">Escribe de nuevo el password:</label>
+    <input  type="password" 
+            name="checkPassword"
+            formControlName="checkPassword" 
+            class="form-control" 
+            [ngClass]="{'is-invalid':  formTools.mustShowErrors('checkPassword').required || 
+                                       user.hasError('nomatch') }" required/>
+    <div *ngIf="formTools.mustShowErrors('checkPassword').required"
+    class="invalid-feedback">Este campo es requerido.</div>
+    <div *ngIf="!formTools.mustShowErrors('checkPassword').required && user.hasError('nomatch')"
+    class="invalid-feedback">Los passwords no coinciden.</div>
   </div>
 
   <div class="form-group row">
