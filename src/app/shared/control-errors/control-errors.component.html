@@ -1,0 +1,12 @@
+
+<div *ngIf="!special; then normalError else specialError"></div>
+      
+<ng-template #normalError >
+      <div *ngIf="formTools.mustShowErrors(field)[error]"
+      class="invalid-feedback" >{{ errorMessage }}</div>
+</ng-template>
+
+<ng-template #specialError >
+      <div *ngIf="!formTools.mustShowErrors(field)[error] && form.hasError(special)"
+      class="invalid-feedback" >{{ errorMessage }}</div>
+</ng-template>
