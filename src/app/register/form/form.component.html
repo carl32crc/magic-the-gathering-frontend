@@ -7,8 +7,7 @@
             name="name"
             formControlName="name" 
             class="form-control" 
-            [ngClass]="{'is-invalid': formTools.mustShowErrors('name').required }"
-            [ngClass]="{'is-valid': !formTools.mustShowErrors('name').required }" required/>
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('name').required }" required/>
             
     <mtg-control-errors errorMessage="Este campo es requerido." 
                         error="required" 
@@ -84,11 +83,18 @@
                         special="nomatch" ></mtg-control-errors>
   </div>
 
+
+  
+
+  <div *ngIf="message" class="alert alert-info" role="alert">
+    {{ message }}
+  </div>
+
   <div class="form-group row">
     <label class="col-form-label">&nbsp;</label>
     <div class="input-group col-md-8">
       <button [disabled]="user.invalid" type="submit" class="btn btn-outline-primary">
-        Guardar
+        Crear cuenta
       </button>
     </div>
   </div>

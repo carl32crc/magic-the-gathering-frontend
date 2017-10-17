@@ -1,0 +1,50 @@
+
+<form novalidate [formGroup]="user" (ngSubmit)="logIn(user)">
+  
+  <div class="form-group">
+    <label class="form-control-label">Email:</label>
+    <input  type="text" 
+            name="email"
+            formControlName="email" 
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('email').required ||
+                                      formTools.mustShowErrors('email').pattern }" required/>
+
+    <mtg-control-errors errorMessage="El email no es valido." 
+                        error="pattern" 
+                        [form]="user" 
+                        field="email" ></mtg-control-errors>
+            
+    <mtg-control-errors errorMessage="Este campo es requerido." 
+                        error="required" 
+                        [form]="user" 
+                        field="email" ></mtg-control-errors>
+  </div>
+
+  <div class="form-group">
+    <label class="form-control-label">Password:</label>
+    <input  type="password" 
+            name="password"
+            formControlName="password" 
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('password').required }" required/>
+      
+    <mtg-control-errors errorMessage="Este campo es requerido." 
+                        error="required" 
+                        [form]="user" 
+                        field="password" ></mtg-control-errors>
+  </div>    
+
+  <!-- <div *ngIf="message" class="alert alert-info" role="alert">
+    {{ message }}
+  </div> -->
+
+  <div class="form-group row">
+    <label class="col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button [disabled]="user.invalid" type="submit" class="btn btn-outline-primary">
+        Log In
+      </button>
+    </div>
+  </div>
+</form>
