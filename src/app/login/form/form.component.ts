@@ -1,16 +1,18 @@
 import { FormTools } from '../../shared/form-tools.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { User } from '../models/user.interface';
 import { server } from './../../constants/server.constants';
 import { patterns } from './../../constants/patterns.constants';
 import { LogInService } from './../services/log-in.service';
+import { LocalStorage } from './../../utils/local-storage/LocalStorage';
 
 @Component({
   selector: 'mtg-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
-  providers: [ LogInService ],
+  providers: [ LogInService, LocalStorage ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormComponent implements OnInit {
@@ -22,7 +24,8 @@ export class FormComponent implements OnInit {
   private identify;
   private token;
 
-  constructor(private fb: FormBuilder, private ls: LogInService, private ref: ChangeDetectorRef) {}
+  constructor(private fb: FormBuilder, private ls: LogInService,
+              private ref: ChangeDetectorRef, private storage: LocalStorage, private router: Router) {}
 
   ngOnInit() {
     this.buildForm();
@@ -40,14 +43,14 @@ export class FormComponent implements OnInit {
   logIn({ value, valid }: { value: User, valid: boolean }) {
     this.ls.logIn(value, 'true').subscribe(
       response => {
-        console.log(response);
-        // this.token = response.token;
 
-        // if (this.token.length <= 0) {
-        //   console.log('El token no se ha generado');
-        // } else {
-        //   console.log(this.token);
-        // }
+        if (response.user && response.token) {
+          this.storage.setItemStorage('user', response.user);
+          this.storage.setItemStorage('token', response.token);
+
+          this.router.navigate(['/']);
+        }
+
       },
       error => {
         console.log(error);

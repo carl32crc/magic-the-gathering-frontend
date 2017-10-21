@@ -12,17 +12,36 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['home']">Home </a>
+        <!-- <a class="nav-link" [routerLink]="['home']">Equipo </a>
+        <a class="nav-link" [routerLink]="['home']">Contacta </a>
+        <a class="nav-link" [routerLink]="['home']">Patreon </a>
+        <a class="nav-link" [routerLink]="['home']">Comprar cartas </a> -->
       </li>
     </ul>
     
-    <ul class="nav navbar-nav navbar-right">
-        <li  class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['login']">Login</a>
-        </li>
-        <li  class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['register']">Registro</a>
-        </li>
-      </ul>
+    <ul class="nav navbar-nav navbar-right" *ngIf="!userInfo" >
+      <li  class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['login']">Login</a>
+      </li>
+      <li  class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['register']">Registro</a>
+      </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right" *ngIf="userInfo" >
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
+           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ userInfo.name }} <span class="caret"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Mis datos</a>
+          <a class="dropdown-item" href="#">Cerrar sesión</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
 
   </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'mtg-top-bar',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-bar.component.scss']
 })
 export class TopBarComponent implements OnInit {
+  @Input() userInfo;
 
   constructor() { }
 
   ngOnInit() {
+    console.log('navbar' , this.userInfo);
   }
 
 }
