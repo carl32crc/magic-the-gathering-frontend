@@ -10,7 +10,7 @@ export class LocalStorage {
     }
 
     public getTokenStorage() {
-        const token = JSON.parse(localStorage.getItem('token'));
+        const token = localStorage.getItem('token');
 
         return token !== undefined ? this.token = token : this.token = null;
     }
