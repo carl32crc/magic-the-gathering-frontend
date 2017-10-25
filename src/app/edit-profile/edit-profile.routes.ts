@@ -1,8 +1,8 @@
 import { RouterModule, Routes } from '@angular/router';
-import { MyProfileComponent } from './my-profile.component';
+import { EditProfileComponent } from './edit-profile.component';
 
 const ROUTES: Routes = [
-    { path: '', component: MyProfileComponent }
+    { path: '', component: EditProfileComponent }
 ];
 
 export const APP_ROUTING = RouterModule.forChild(ROUTES);

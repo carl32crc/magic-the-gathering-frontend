@@ -1,10 +1,10 @@
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MyProfileComponent } from './my-profile.component';
-import { APP_ROUTING } from './my-profile.routes';
+import { EditProfileComponent } from './edit-profile.component';
+import { APP_ROUTING } from './edit-profile.routes';
 import { SharedModule } from './../shared/shared.module';
-import { EditUserComponent } from './edit-user/edit-user.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     SharedModule
   ],
   declarations: [
-    MyProfileComponent,
-    EditUserComponent
+    EditProfileComponent,
+    FormComponent
   ]
 })
-export class MyProfileModule { }
+export class EditProfileModule { }

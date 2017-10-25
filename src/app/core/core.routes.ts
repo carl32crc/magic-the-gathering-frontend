@@ -4,7 +4,7 @@ const routes: Routes = [
     { path: 'home', loadChildren: './../home/home.module#HomeModule' },
     { path: 'login', loadChildren: './../login/login.module#LoginModule' },
     { path: 'register', loadChildren: './../register/register.module#RegisterModule' },
-    { path: 'profile', loadChildren: './../my-profile/my-profile.module#MyProfileModule' },
+    { path: 'edit-profile', loadChildren: './../edit-profile/edit-profile.module#EditProfileModule' },
     { path: 'article/:id', loadChildren: './../article/article.module#ArticleModule' },
     { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];

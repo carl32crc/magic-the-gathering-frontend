@@ -1,0 +1,62 @@
+
+<form novalidate [formGroup]="user" (ngSubmit)="updateData(user)">
+  
+  <div class="form-group">
+    <label class="form-control-label">Nombre:</label>
+    <input  type="text" 
+            name="name"
+            formControlName="name" 
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('name').required }" required/>
+            
+    <mtg-control-errors errorMessage="Este campo es requerido." 
+                        error="required" 
+                        [form]="user" 
+                        field="name" ></mtg-control-errors>
+  </div>
+
+  <div class="form-group">
+    <label class="form-control-label">Apellidos:</label>
+    <input  type="text" 
+            name="surname"
+            formControlName="surname" 
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('surname').required }" required/>
+    <mtg-control-errors errorMessage="Este campo es requerido." 
+                        error="required" 
+                        [form]="user" 
+                        field="surname" ></mtg-control-errors>
+  </div>
+
+  <div class="form-group">
+    <label class="form-control-label">Email:</label>
+    <input  type="text" 
+            name="email"
+            formControlName="email" 
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('email').required || 
+                                      formTools.mustShowErrors('email').pattern }" required/>
+    <mtg-control-errors errorMessage="Este campo es requerido." 
+                        error="required" 
+                        [form]="user" 
+                        field="email" ></mtg-control-errors>
+    <mtg-control-errors errorMessage="El email no es valido." 
+                        error="pattern" 
+                        [form]="user" 
+                        field="email" ></mtg-control-errors>
+  </div>
+
+  <div *ngIf="message" class="alert alert-info" role="alert">
+    {{ message }}
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button [disabled]="user.invalid" type="submit" class="btn btn-outline-primary">
+        Actualizar datos
+      </button>
+    </div>
+  </div>
+  
+</form>
