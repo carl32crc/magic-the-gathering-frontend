@@ -21,6 +21,7 @@ export class FormTools {
         required: false,
         minLength: false,
         pattern: false,
+        image: false
     };
 
     const control = this.getControl(controlName);

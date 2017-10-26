@@ -8,9 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TopBarComponent implements OnInit {
   @Input() userInfo;
   @Input() logout;
+  @Input() avatar;
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }
