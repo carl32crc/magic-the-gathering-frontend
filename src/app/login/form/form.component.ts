@@ -53,7 +53,8 @@ export class FormComponent implements OnInit {
 
       },
       error => {
-        console.log(error);
+        this.message = error.json().message;
+        this.ref.detectChanges();
       }
     );
   }
