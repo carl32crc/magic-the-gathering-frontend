@@ -4,6 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { APP_ROUTING } from './admin-panel.routes';
 import { AdminPanelComponent } from './admin-panel.component';
 import { SharedModule } from '../shared/shared.module';
+import { ArticlesComponent } from './articles/articles.component';
+import { UsersComponent } from './users/users.component';
+import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
   imports: [
@@ -13,7 +16,10 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule
   ],
   declarations: [
-    AdminPanelComponent
+    AdminPanelComponent,
+    ArticlesComponent,
+    UsersComponent,
+    SliderComponent
   ]
 })
 export class AdminPanelModule { }

@@ -39,6 +39,8 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" [routerLink]="['edit-profile']" >Mi perfil</a>
+          <a class="dropdown-item" [routerLink]="['user-panel']" 
+            *ngIf="userInfo && (userInfo.role === 'ROLE_ADMIN' || userInfo.role === 'ROLE_USER') " >Articulos</a>
           <a class="dropdown-item" [routerLink]="['admin-panel']" 
             *ngIf="userInfo && userInfo.role === 'ROLE_ADMIN' " >Administración</a>
           <div class="dropdown-divider"></div>

@@ -1,5 +1,3 @@
-import { LocalStorage } from './../utils/local-storage/LocalStorage';
-import { AdminGuard } from './../utils/guards/admin.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShellComponent } from './shell/shell.component';
@@ -8,6 +6,10 @@ import { MainContentComponent } from './shell/main-content/main-content.componen
 import { FooterComponent } from './shell/footer/footer.component';
 import { APP_ROUTING } from './core.routes';
 import { SharedModule } from './../shared/shared.module';
+
+import { LocalStorage } from './../utils/local-storage/LocalStorage';
+import { AdminGuard } from './../utils/guards/admin.guard';
+import { UserGuard } from './../utils/guards/user.guard';
 
 
 @NgModule({
@@ -27,6 +29,7 @@ import { SharedModule } from './../shared/shared.module';
   ],
   providers: [
     AdminGuard,
+    UserGuard,
     LocalStorage
   ]
 })

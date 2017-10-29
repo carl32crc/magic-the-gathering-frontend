@@ -1,4 +1,6 @@
-html {
-  position: relative; 
-  min-height: 100%;
+:host {
+  html {
+    position: relative; 
+    min-height: 100%;
+  }
 }
