@@ -1,3 +1,5 @@
+import { LocalStorage } from './../utils/local-storage/LocalStorage';
+import { AdminGuard } from './../utils/guards/admin.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShellComponent } from './shell/shell.component';
@@ -6,6 +8,7 @@ import { MainContentComponent } from './shell/main-content/main-content.componen
 import { FooterComponent } from './shell/footer/footer.component';
 import { APP_ROUTING } from './core.routes';
 import { SharedModule } from './../shared/shared.module';
+
 
 @NgModule({
   imports: [
@@ -21,6 +24,10 @@ import { SharedModule } from './../shared/shared.module';
   ],
   exports: [
     ShellComponent
+  ],
+  providers: [
+    AdminGuard,
+    LocalStorage
   ]
 })
 export class CoreModule { }
