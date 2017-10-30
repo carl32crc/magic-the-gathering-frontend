@@ -1,3 +1,18 @@
-<p>
-  admin-panel works!
-</p>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <h1>Panel de Administración</h1>
+      </div>
+      <div class="col-md-3">
+        <div class="list-group">
+          <a [routerLink]="['slider']" routerLinkActive="active" class="list-group-item list-group-item-action">Slider</a>
+          <a [routerLink]="['users']"  routerLinkActive="active" class="list-group-item list-group-item-action">Usuarios</a>
+          <a [routerLink]="['articles']" routerLinkActive="active"class="list-group-item list-group-item-action">Articulos</a>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+</div>
+
