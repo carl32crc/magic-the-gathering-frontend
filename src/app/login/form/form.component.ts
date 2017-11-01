@@ -2,7 +2,7 @@ import { FormTools } from '../../shared/form-tools.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { User } from '../../models/user.interface';
+import { User } from '../models/user.interface';
 import { server } from './../../constants/server.constants';
 import { patterns } from './../../constants/patterns.constants';
 import { LogInService } from './../services/log-in.service';

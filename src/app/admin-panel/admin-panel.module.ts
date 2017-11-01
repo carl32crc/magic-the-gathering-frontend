@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ArticlesComponent } from './articles/articles.component';
 import { UsersComponent } from './users/users.component';
 import { SliderComponent } from './slider/slider.component';
+import { FormComponent } from './slider/form/form.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { SliderComponent } from './slider/slider.component';
     AdminPanelComponent,
     ArticlesComponent,
     UsersComponent,
-    SliderComponent
+    SliderComponent,
+    FormComponent
   ]
 })
 export class AdminPanelModule { }
