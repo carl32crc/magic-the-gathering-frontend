@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
     this.slider = this.fb.group({
       title: ['' , [Validators.required]],
       subtitle: ['' , [Validators.required]],
-      date: ['2011-08-19', []]
+      date: ['2017-08-19', []]
     });
 
     this.formTools = new FormTools(this.slider);
@@ -47,8 +47,12 @@ export class FormComponent implements OnInit {
     if (this.image && (this.image[0].type === 'image/png' || this.image[0].type === 'image/jpeg')) {
       value.image = this.image;
 
-      this.sld.uploadSlider(`${this.url}save-slider`, value, this.token, 'image').then((res) => {
-        console.log(res);
+      this.sld.uploadSlider(`${this.url}save-slider`, value, this.token, 'image').then((res: any) => {
+        if (res.slider) {
+          this.message = res.message;
+        } else {
+          this.message = res.message;
+        }
       }).catch((err) => {
         console.log(err);
       });
