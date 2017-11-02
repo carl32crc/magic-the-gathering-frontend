@@ -6,11 +6,8 @@ import { LocalStorage } from './../../utils/local-storage/LocalStorage';
 
 @Injectable()
 export class UploadService {
-  private url: string;
 
-  constructor(private storage: LocalStorage, private http: Http) {
-    this.url = server.url;
-  }
+  constructor() {}
 
   uploadImage(url: string, params: Array<string>, files: Array<File>, token: string, name: string) {
     return new Promise((resolve, reject) => {

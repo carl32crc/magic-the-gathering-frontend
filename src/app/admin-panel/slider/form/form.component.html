@@ -1,3 +1,52 @@
-<p>
-  form works!
-</p>
+
+<form novalidate [formGroup]="slider" (ngSubmit)="add(slider)">
+  
+  <div class="form-group">
+    <label class="form-control-label">Title:</label>
+    <input  type="text" 
+            name="title"
+            formControlName="title" 
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('title').required }" required/>
+            
+    <mtg-control-errors errorMessage="Este campo es requerido." 
+                        error="required" 
+                        [form]="slider" 
+                        field="title" ></mtg-control-errors>
+  </div>
+
+  <div class="form-group">
+    <label class="form-control-label">Substitulo:</label>
+    <input  type="text" 
+            name="subtitle"
+            formControlName="subtitle" 
+            class="form-control" 
+            [ngClass]="{'is-invalid': formTools.mustShowErrors('subtitle').required }" required/>
+
+    <mtg-control-errors errorMessage="Este campo es requerido." 
+                        error="required" 
+                        [form]="slider" 
+                        field="surname" ></mtg-control-errors>
+  </div>
+
+  <div class="form-group">
+    <label class="form-control-label">Imagen:</label>
+    <input  type="file" 
+            (change)="changeImage($event)" 
+            class="form-control" />
+  </div>
+
+  <div *ngIf="message" class="alert alert-info" role="alert">
+    {{ message }}
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button [disabled]="slider.invalid" type="submit" class="btn btn-outline-primary">
+        Añadir
+      </button>
+    </div>
+  </div>
+  
+</form>

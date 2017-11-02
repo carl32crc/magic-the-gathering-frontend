@@ -1,7 +1,7 @@
 import { FormTools } from '../../shared/form-tools.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, DoCheck } from '@angular/core';
-import { User } from '../../models/user.interface';
+import { User } from '../models/user.interface';
 import { server } from './../../constants/server.constants';
 import { patterns } from './../../constants/patterns.constants';
 import { LocalStorage } from './../../utils/local-storage/LocalStorage';
@@ -76,6 +76,8 @@ export class FormComponent implements OnInit, DoCheck {
 
   uploadFile(file: any) {
     this.files = <Array<File>>file.target.files;
+
+    console.log(this.files);
 
     if (this.files[0].type === 'image/png' || this.files[0].type === 'image/jpeg') {
       this.upls.uploadImage(`${this.url}upload-user-image/${this.identify._id}`, [] ,
