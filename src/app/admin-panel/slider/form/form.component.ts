@@ -32,7 +32,8 @@ export class FormComponent implements OnInit {
   buildForm() {
     this.slider = this.fb.group({
       title: ['' , [Validators.required]],
-      subtitle: ['' , [Validators.required]]
+      subtitle: ['' , [Validators.required]],
+      date: ['2011-08-19', []]
     });
 
     this.formTools = new FormTools(this.slider);

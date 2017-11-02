@@ -24,6 +24,7 @@ export class SliderService {
 
       formData.append('title', params.title);
       formData.append('subtitle', params.subtitle);
+      formData.append('date', params.date);
 
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
