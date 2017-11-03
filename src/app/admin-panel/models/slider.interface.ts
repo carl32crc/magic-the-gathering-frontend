@@ -2,5 +2,5 @@ export interface Slider {
     title: String;
     subtitle: String;
     date: Date;
-    image: Array<File>;
+    image: Array<File> | string;
 }

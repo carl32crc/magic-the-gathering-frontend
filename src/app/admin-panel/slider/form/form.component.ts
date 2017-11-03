@@ -61,5 +61,4 @@ export class FormComponent implements OnInit {
       this.message = 'Debes de añadir una imagen .jpg o .png';
     }
   }
-
 }

@@ -6,8 +6,11 @@ import { LocalStorage } from './../../utils/local-storage/LocalStorage';
 
 @Injectable()
 export class SliderService {
+  private url: string;
 
-  constructor() { }
+  constructor(private http: Http) {
+    this.url = server.url;
+  }
 
   uploadSlider(url: string, params: any, token: string, name: string) {
     return new Promise((resolve, reject) => {
@@ -41,6 +44,14 @@ export class SliderService {
       xhr.send(formData);
 
     });
+  }
+
+  getSlider(token) {
+
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Authorization' : token });
+
+    return this.http.get( `${this.url}slider`, { headers: headers })
+                .map(res => res.json());
   }
 
 }

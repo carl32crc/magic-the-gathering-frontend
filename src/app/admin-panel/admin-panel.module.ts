@@ -8,6 +8,7 @@ import { ArticlesComponent } from './articles/articles.component';
 import { UsersComponent } from './users/users.component';
 import { SliderComponent } from './slider/slider.component';
 import { FormComponent } from './slider/form/form.component';
+import { ListSliderComponent } from './slider/list-slider/list-slider.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { FormComponent } from './slider/form/form.component';
     ArticlesComponent,
     UsersComponent,
     SliderComponent,
-    FormComponent
+    FormComponent,
+    ListSliderComponent
   ]
 })
 export class AdminPanelModule { }
