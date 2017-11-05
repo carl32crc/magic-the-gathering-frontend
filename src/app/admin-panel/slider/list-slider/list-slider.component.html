@@ -1,20 +1,19 @@
-<table class="table table-striped bg-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Titulo</th>
-      <th scope="col">Subtitulo</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Imagen</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let slide of slider; let i = index;">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ slide.title }}</td>
-      <td>{{ slide.subtitle }}</td>
-      <td>{{ !slide.date ? 'No tiene fecha' : slide.date }}</td>
-      <td>{{ slide.image }}</td>
-    </tr>
-  </tbody>
-</table>
+<div id="accordion" role="tablist">
+  <div *ngFor="let slide of slider; let i = index;" class="card">
+    <div class="card-header" role="tab" [attr.id]="'headdin' + (i + 1)">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" [attr.href]="'#accordion' + (i + 1)" aria-expanded="true" [attr.aria-controls]="'accordion' + (i + 1)">
+          {{ slide.title }}
+        </a>
+      </h5>
+    </div>
+    <div [attr.id]="'accordion' + (i + 1)" class="collapse" role="tabpanel" [attr.aria-labelledby]="'headdin' + (i + 1)" data-parent="#accordion">
+      <div class="card-body">
+          <mtg-form [date]="slide.date" 
+                    [title]="slide.title" 
+                    [subtitle]="slide.title"
+                    [imageDb]="slide.image"></mtg-form>
+      </div>
+    </div>
+  </div>
+</div>

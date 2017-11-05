@@ -1,7 +1,7 @@
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Component, DoCheck, OnInit, ChangeDetectorRef } from '@angular/core';
-import { LocalStorage } from './../../utils/local-storage/LocalStorage';
+import { LocalStorage } from './../../utils/local-storage';
 import { server } from './../../constants/server.constants';
 
 @Component({

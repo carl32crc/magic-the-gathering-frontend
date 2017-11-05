@@ -6,7 +6,7 @@ import { User } from '../models/user.interface';
 import { server } from './../../constants/server.constants';
 import { patterns } from './../../constants/patterns.constants';
 import { LogInService } from './../services/log-in.service';
-import { LocalStorage } from './../../utils/local-storage/LocalStorage';
+import { LocalStorage } from './../../utils/local-storage';
 
 @Component({
   selector: 'mtg-form',

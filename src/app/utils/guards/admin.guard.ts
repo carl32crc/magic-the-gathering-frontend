@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { LocalStorage } from './../local-storage/LocalStorage';
+import { LocalStorage } from './../local-storage';
 
 @Injectable()
 export class AdminGuard implements CanActivate {

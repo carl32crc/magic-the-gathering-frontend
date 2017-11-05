@@ -16,7 +16,7 @@
   </div>
 
   <div class="form-group">
-    <label class="form-control-label">Substitulo:</label>
+    <label class="form-control-label">Subtitulo:</label>
     <input  type="text" 
             name="subtitle"
             formControlName="subtitle" 
@@ -30,7 +30,7 @@
   </div>
 
   <div class="form-group">
-    <label class="form-control-label">Date:</label>
+    <label class="form-control-label">Fecha:</label>
       <input
           type="text" 
           name="date"
@@ -41,6 +41,7 @@
 
   <div class="form-group">
     <label class="form-control-label">Imagen:</label>
+    <img *ngIf="imageDb" [attr.src]="url + 'image-slider/' + imageDb" />
     <input  type="file" 
             (change)="changeImage($event)" 
             class="form-control" />

@@ -4,7 +4,7 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, DoCheck 
 import { User } from '../models/user.interface';
 import { server } from './../../constants/server.constants';
 import { patterns } from './../../constants/patterns.constants';
-import { LocalStorage } from './../../utils/local-storage/LocalStorage';
+import { LocalStorage } from './../../utils/local-storage';
 import { UpdateService } from './../services/update.service';
 import { UploadService } from './../services/upload.service';
 

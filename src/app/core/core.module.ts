@@ -7,7 +7,7 @@ import { FooterComponent } from './shell/footer/footer.component';
 import { APP_ROUTING } from './core.routes';
 import { SharedModule } from './../shared/shared.module';
 
-import { LocalStorage } from './../utils/local-storage/LocalStorage';
+import { LocalStorage } from './../utils/local-storage';
 import { AdminGuard } from './../utils/guards/admin.guard';
 import { UserGuard } from './../utils/guards/user.guard';
 
