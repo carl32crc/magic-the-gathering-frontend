@@ -5,7 +5,7 @@
 </p>
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
-    <mtg-form (getSlider)="mtgList.getSlider()"></mtg-form>
+    <mtg-form  (action)="addSlide($event)" (getSlider)="mtgList.getSlider()"></mtg-form>
   </div>
 </div>
 <mtg-list-slider #mtgList ></mtg-list-slider>

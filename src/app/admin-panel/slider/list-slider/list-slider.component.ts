@@ -27,13 +27,11 @@ export class ListSliderComponent implements OnInit {
   }
 
   getSlider() {
-    console.log('llll')
     this.sld.getSlider(this.token).subscribe(
       response => {
         if (response.slide) {
           this.slider = response.slide;
         }
-        console.log(this.slider);
       },
       error => {
         console.log(error);
