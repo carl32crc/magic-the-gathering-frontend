@@ -36,7 +36,7 @@ export class SliderService {
                 .map(res => res.json());
   }
 
-  makeRequest (url: string, image, headers: Headers = new Headers()) {
+  uploadImage (url: string, image, headers: Headers = new Headers()) {
 
     const formData: any = new FormData();
     formData.append('image', image[0], image[0].name);

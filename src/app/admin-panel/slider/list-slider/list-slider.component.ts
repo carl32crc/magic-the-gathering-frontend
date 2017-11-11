@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Headers } from '@angular/http';
 import { Slider } from '../../models/slider.interface';
 import { LocalStorage } from './../../../utils/local-storage';
 import { SliderService } from '../../services/slider.service';
 import { server } from './../../../constants/server.constants';
+import { FormComponent } from '../form/form.component';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { server } from './../../../constants/server.constants';
 })
 export class ListSliderComponent implements OnInit {
 
+  @ViewChild(FormComponent) formComponent: FormComponent;
   private message: string;
   private token: string;
   private slider: Array<Slider>;
@@ -22,7 +24,7 @@ export class ListSliderComponent implements OnInit {
   constructor(private storage: LocalStorage, private sld: SliderService) { }
 
   ngOnInit() {
-    this.url = server.url + 'image-slider/';
+    this.url = server.url;
     this.token = this.storage.getTokenStorage();
     this.getSlider();
   }
@@ -45,10 +47,17 @@ export class ListSliderComponent implements OnInit {
     headers.delete('Content-Type');
     headers.set('Authorization', this.token);
 
-    this.sld.makeRequest(`${server.url}upload-slider-image/${id}`, imageFile , headers).subscribe(
-      response => { console.log(response); },
-      error => { console.log(error); }
-    );
+    if (imageFile[0].type === 'image/png' || imageFile[0].type === 'image/jpeg') {
+      this.sld.uploadImage(`${this.url}upload-slider-image/${id}`, imageFile , headers).subscribe(
+        response => {
+          this.formComponent.imageDb = response.image;
+          this.formComponent.message = 'La imagen se ha cambiado';
+        },
+        error => { console.log(error); }
+      );
+    } else {
+      this.formComponent.message = 'Debes de añadir una imagen .jpg o .png';
+    }
   }
 
 }
