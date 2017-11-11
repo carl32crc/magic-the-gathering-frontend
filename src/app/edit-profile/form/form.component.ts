@@ -1,5 +1,6 @@
 import { FormTools } from '../../shared/form-tools.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Headers } from '@angular/http';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, DoCheck } from '@angular/core';
 import { User } from '../models/user.interface';
 import { server } from './../../constants/server.constants';
@@ -77,12 +78,20 @@ export class FormComponent implements OnInit, DoCheck {
   uploadFile(file: any) {
     this.files = <Array<File>>file.target.files;
 
+    const headers = new Headers();
+    headers.delete('Content-Type');
+    headers.set('Authorization', this.token);
+
     if (this.files[0].type === 'image/png' || this.files[0].type === 'image/jpeg') {
-      this.upls.uploadImage(`${this.url}upload-user-image/${this.identify._id}`, [] ,
-        this.files, this.token, 'image').then((response: any) => {
-            this.identify.image = response.image;
-            this.storage.setItemStorage('user', this.identify);
-        });
+      this.upls.uploadImage(`${this.url}upload-user-image/${this.identify._id}`, this.files, headers).subscribe(
+        response => {
+          this.identify.image = response.image;
+          this.storage.setItemStorage('user', this.identify);
+        },
+        error => {
+          console.log(error);
+        }
+      );
     } else {
       this.message = 'La imagen tiene que tener la extensión .jpeg, .jpg o .png';
     }

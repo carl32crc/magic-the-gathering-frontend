@@ -15,34 +15,17 @@ export class SliderService {
     this.url = server.url;
   }
 
-  uploadSlider(url: string, params: any, token: string, name: string) {
-    return new Promise((resolve, reject) => {
-      const formData: any = new FormData();
-      const xhr = new XMLHttpRequest();
+  uploadSlider (url: string, params, headers: Headers = new Headers()) {
 
-      for (let i = 0; i < params.image.length; i++) {
-        formData.append(name, params.image[i], params.image[i].name);
-      }
+    const formData: any = new FormData();
+    formData.append('image', params.image[0], params.image[0].name);
+    formData.append('title', params.title);
+    formData.append('subtitle', params.subtitle);
+    formData.append('date', params.date);
 
-      formData.append('title', params.title);
-      formData.append('subtitle', params.subtitle);
-      formData.append('date', params.date);
-
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            resolve(JSON.parse(xhr.response));
-          } else {
-            reject(xhr.response);
-          }
-        }
-      };
-
-      xhr.open( 'POST', url, true );
-      xhr.setRequestHeader('Authorization', token);
-      xhr.send(formData);
-
-    });
+    const options = new RequestOptions({ headers: headers });
+    return this.http.post(url, formData, options)
+                    .map(res => res.json());
   }
 
   getSlider(token) {
@@ -53,10 +36,10 @@ export class SliderService {
                 .map(res => res.json());
   }
 
-  makeRequest (url: string, body, headers: Headers = new Headers()) {
+  makeRequest (url: string, image, headers: Headers = new Headers()) {
 
     const formData: any = new FormData();
-    formData.append('image', body[0], body[0].name);
+    formData.append('image', image[0], image[0].name);
 
     const options = new RequestOptions({ headers: headers });
     return this.http.post(url, formData, options)

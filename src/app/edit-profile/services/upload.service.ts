@@ -1,4 +1,4 @@
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { server } from './../../constants/server.constants';
@@ -7,32 +7,16 @@ import { LocalStorage } from './../../utils/local-storage';
 @Injectable()
 export class UploadService {
 
-  constructor() {}
+  constructor(private http: Http) {}
 
-  uploadImage(url: string, params: Array<string>, files: Array<File>, token: string, name: string) {
-    return new Promise((resolve, reject) => {
-      const formData: any = new FormData();
-      const xhr = new XMLHttpRequest();
+  uploadImage (url: string, image, headers: Headers = new Headers()) {
 
-      for (let i = 0; i < files.length; i++) {
-        formData.append(name, files[i], files[i].name);
-      }
+    const formData: any = new FormData();
+    formData.append('image', image[0], image[0].name);
 
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            resolve(JSON.parse(xhr.response));
-          } else {
-            reject(xhr.response);
-          }
-        }
-      };
-
-      xhr.open( 'POST', url, true );
-      xhr.setRequestHeader('Authorization', token);
-      xhr.send(formData);
-
-    });
+    const options = new RequestOptions({ headers: headers });
+    return this.http.post(url, formData, options)
+                    .map(res => res.json());
   }
 
 }

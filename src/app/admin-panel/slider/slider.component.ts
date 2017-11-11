@@ -1,6 +1,7 @@
 import { SliderService } from './../services/slider.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Headers } from '@angular/http';
 import { FormTools } from './../../shared/form-tools.service';
 import { Slider } from './../models/slider.interface';
 import { server } from './../../constants/server.constants';
@@ -29,16 +30,16 @@ export class SliderComponent implements OnInit {
   }
 
   addSlide(value) {
-    this.sld.uploadSlider(`${this.url}save-slider`, value, this.token, 'image').then((res: any) => {
-      if (res.slider) {
-        this.message.message = res.message;
-        this.call.getSlider();
-      } else {
-        this.message.message = res.message;
-      }
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
+    const headers = new Headers();
+    headers.delete('Content-Type');
+    headers.set('Authorization', this.token);
 
+    this.sld.uploadSlider(`${this.url}save-slider`, value, headers).subscribe(
+      response => {
+        this.message.message = response.message;
+        this.call.getSlider();
+      },
+      error => { console.log(error); }
+    );
+  }
 }
