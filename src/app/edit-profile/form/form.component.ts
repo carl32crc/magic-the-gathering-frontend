@@ -77,8 +77,6 @@ export class FormComponent implements OnInit, DoCheck {
   uploadFile(file: any) {
     this.files = <Array<File>>file.target.files;
 
-    console.log(this.files);
-
     if (this.files[0].type === 'image/png' || this.files[0].type === 'image/jpeg') {
       this.upls.uploadImage(`${this.url}upload-user-image/${this.identify._id}`, [] ,
         this.files, this.token, 'image').then((response: any) => {

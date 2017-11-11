@@ -14,10 +14,6 @@ export class UploadService {
       const formData: any = new FormData();
       const xhr = new XMLHttpRequest();
 
-      // files.map((d) => {
-      //   console.log(d);
-      // });
-
       for (let i = 0; i < files.length; i++) {
         formData.append(name, files[i], files[i].name);
       }

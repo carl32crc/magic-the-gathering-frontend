@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Headers } from '@angular/http';
 import { Slider } from '../../models/slider.interface';
 import { LocalStorage } from './../../../utils/local-storage';
 import { SliderService } from '../../services/slider.service';
@@ -36,6 +37,17 @@ export class ListSliderComponent implements OnInit {
       error => {
         console.log(error);
       }
+    );
+  }
+
+  uploadImage(imageFile, id) {
+    const headers = new Headers();
+    headers.delete('Content-Type');
+    headers.set('Authorization', this.token);
+
+    this.sld.makeRequest(`${server.url}upload-slider-image/${id}`, imageFile , headers).subscribe(
+      response => { console.log(response); },
+      error => { console.log(error); }
     );
   }
 

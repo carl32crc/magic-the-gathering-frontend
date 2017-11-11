@@ -12,7 +12,9 @@
           <mtg-form [date]="slide.date" 
                     [title]="slide.title" 
                     [subtitle]="slide.title"
-                    [imageDb]="slide.image"></mtg-form>
+                    [imageDb]="slide.image"
+                    [update]="true"
+                    (imageUpdate)="uploadImage($event, slide._id)"></mtg-form>
       </div>
     </div>
   </div>

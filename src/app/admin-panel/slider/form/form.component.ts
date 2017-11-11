@@ -17,7 +17,9 @@ export class FormComponent implements OnInit {
   @Input() subtitle;
   @Input() date;
   @Input() imageDb;
+  @Input() update;
   @Output() action = new EventEmitter<Slider>();
+  @Output() imageUpdate = new EventEmitter<any>();
   private slider: FormGroup;
   private formTools: FormTools;
   public message: string;
@@ -27,6 +29,7 @@ export class FormComponent implements OnInit {
   constructor(private fb: FormBuilder, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.url = server.url;
     this.buildForm();
     this.ref.detectChanges();
   }
@@ -43,14 +46,21 @@ export class FormComponent implements OnInit {
 
   changeImage(file: any) {
     this.image = <Array<File>>file.target.files;
+    if (this.update) {
+      this.imageUpdate.emit(this.image);
+    }
   }
 
   submit({ value, valid }: { value: Slider, valid: boolean }) {
 
-    if (this.image && (this.image[0].type === 'image/png' || this.image[0].type === 'image/jpeg')) {
-      value.date = eventDate(value.date);
-      value.image = this.image;
-      this.action.emit(value);
+    if ((this.image && (this.image[0].type === 'image/png' || this.image[0].type === 'image/jpeg')) || this.update ) {
+      if (this.update) {
+        // this.action.emit(this.image);
+      } else {
+        value.date = eventDate(value.date);
+        value.image = this.image;
+        this.action.emit(value);
+      }
     } else {
       this.message = 'Debes de añadir una imagen .jpg o .png';
     }
