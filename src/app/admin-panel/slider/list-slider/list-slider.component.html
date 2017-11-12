@@ -14,10 +14,14 @@
                     [subtitle]="slide.subtitle"
                     [imageDb]="slide.image"
                     [update]="true"
-                    (deleteSlider)="deleteSlider(slide._id)"
                     (action)="updateSlider($event, slide._id)"
                     (imageUpdate)="uploadImage($event, slide._id)"></mtg-form>
       </div>
     </div>
+    <mtg-modal title="Estas a un paso de eliminar:" [message]="slide.title">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button (click)="deleteSlider(slide._id)" 
+                data-dismiss="modal" type="button" class="btn btn-primary">Confirmar</button>
+    </mtg-modal>
   </div>
 </div>

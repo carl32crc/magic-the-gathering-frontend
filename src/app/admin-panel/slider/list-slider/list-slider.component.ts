@@ -16,6 +16,8 @@ import { FormComponent } from '../form/form.component';
 export class ListSliderComponent implements OnInit {
 
   @ViewChild(FormComponent) formComponent: FormComponent;
+  private isModalVisible: boolean;
+  private success = false;
   private message: string;
   private token: string;
   private slider: Array<any>;
@@ -24,6 +26,7 @@ export class ListSliderComponent implements OnInit {
   constructor(private storage: LocalStorage, private sld: SliderService, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.isModalVisible = false;
     this.url = server.url;
     this.token = this.storage.getTokenStorage();
     this.getSlider();
@@ -80,6 +83,7 @@ export class ListSliderComponent implements OnInit {
       this.formComponent.message = 'Debes de añadir una imagen .jpg o .png';
     }
   }
+
 
   deleteSlider(id) {
     this.sld.deleteSlider(id, this.token).subscribe(
