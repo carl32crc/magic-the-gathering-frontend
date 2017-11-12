@@ -81,4 +81,17 @@ export class ListSliderComponent implements OnInit {
     }
   }
 
+  deleteSlider(id) {
+    this.sld.deleteSlider(id, this.token).subscribe(
+      response => {
+        if (response.slide) {
+          this.getSlider();
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
 }

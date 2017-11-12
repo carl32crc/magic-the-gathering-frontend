@@ -14,7 +14,7 @@
                     [subtitle]="slide.subtitle"
                     [imageDb]="slide.image"
                     [update]="true"
-                    (delete)="deleteSlider(slide._id)"
+                    (deleteSlider)="deleteSlider(slide._id)"
                     (action)="updateSlider($event, slide._id)"
                     (imageUpdate)="uploadImage($event, slide._id)"></mtg-form>
       </div>

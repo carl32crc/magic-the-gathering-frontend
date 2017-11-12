@@ -45,6 +45,16 @@ export class SliderService {
             .map(res => res.json());
   }
 
+  deleteSlider(id, token) {
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    });
+
+    return this.http.delete(`${this.url}delete-slider/${id}`, {headers: headers})
+            .map(res => res.json());
+  }
+
   uploadImage (url: string, image, headers: Headers = new Headers()) {
 
     const formData: any = new FormData();

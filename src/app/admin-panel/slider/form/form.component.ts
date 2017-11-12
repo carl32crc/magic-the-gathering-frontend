@@ -20,6 +20,7 @@ export class FormComponent implements OnInit {
   @Input() update;
   @Output() action = new EventEmitter<Slider>();
   @Output() imageUpdate = new EventEmitter<any>();
+  @Output() deleteSlider = new EventEmitter<any>();
   private slider: FormGroup;
   private formTools: FormTools;
   public message: string;
@@ -48,6 +49,10 @@ export class FormComponent implements OnInit {
     if (this.update) {
       this.imageUpdate.emit(this.image);
     }
+  }
+
+  delete(id) {
+    this.deleteSlider.emit(id);
   }
 
   submit({ value, valid }: { value: Slider, valid: boolean }) {

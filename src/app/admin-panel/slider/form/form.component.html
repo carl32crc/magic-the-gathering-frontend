@@ -54,9 +54,18 @@
   <div class="form-group row">
     <label class="col-form-label">&nbsp;</label>
     <div class="input-group col-md-8">
-      <button [disabled]="slider.invalid" type="submit" class="btn btn-outline-primary">
-        {{ update ? 'Actualizar' : 'Añadir' }}
-      </button>
+      <div class="row">
+        <div class="col-md-7">
+            <button [disabled]="slider.invalid" type="submit" class="btn btn-outline-primary">
+              {{ update ? 'Actualizar' : 'Añadir' }}
+            </button>
+        </div>
+        <div class="col-md-5" *ngIf="update" >
+            <span (click)="delete()" class="btn btn-outline-danger">
+              Delete
+            </span>
+        </div>
+      </div>
     </div>
   </div>
   
