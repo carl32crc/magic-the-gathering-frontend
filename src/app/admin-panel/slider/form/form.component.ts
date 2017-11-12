@@ -1,5 +1,5 @@
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormTools } from '../../../shared/form-tools.service';
 import { Slider } from '../../models/slider.interface';
 import { IsoDateToDate, eventDate } from '../../../utils/date';
@@ -26,12 +26,11 @@ export class FormComponent implements OnInit {
   private image: Array<File>;
   private url: string;
 
-  constructor(private fb: FormBuilder, private ref: ChangeDetectorRef) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.url = server.url;
     this.buildForm();
-    this.ref.detectChanges();
   }
 
   buildForm() {
@@ -54,10 +53,10 @@ export class FormComponent implements OnInit {
   submit({ value, valid }: { value: Slider, valid: boolean }) {
 
     if ((this.image && (this.image[0].type === 'image/png' || this.image[0].type === 'image/jpeg')) || this.update ) {
+      value.date = eventDate(value.date);
       if (this.update) {
-        // this.action.emit(this.image);
+        this.action.emit(value);
       } else {
-        value.date = eventDate(value.date);
         value.image = this.image;
         this.action.emit(value);
       }

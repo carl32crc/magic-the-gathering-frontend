@@ -18,7 +18,7 @@ import { LocalStorage } from './../../utils/local-storage';
 export class SliderComponent implements OnInit {
 
   @ViewChild(ListSliderComponent) call: ListSliderComponent;
-  @ViewChild(FormComponent) message: FormComponent;
+  @ViewChild(FormComponent) formComponent: FormComponent;
   private token: string;
   private url: string;
 
@@ -36,7 +36,7 @@ export class SliderComponent implements OnInit {
 
     this.sld.uploadSlider(`${this.url}save-slider`, value, headers).subscribe(
       response => {
-        this.message.message = response.message;
+        this.formComponent.message = response.message;
         this.call.getSlider();
       },
       error => { console.log(error); }

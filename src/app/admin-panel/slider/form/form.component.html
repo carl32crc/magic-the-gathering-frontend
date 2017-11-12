@@ -55,7 +55,7 @@
     <label class="col-form-label">&nbsp;</label>
     <div class="input-group col-md-8">
       <button [disabled]="slider.invalid" type="submit" class="btn btn-outline-primary">
-        Añadir
+        {{ update ? 'Actualizar' : 'Añadir' }}
       </button>
     </div>
   </div>

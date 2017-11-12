@@ -18,10 +18,10 @@ export class ListSliderComponent implements OnInit {
   @ViewChild(FormComponent) formComponent: FormComponent;
   private message: string;
   private token: string;
-  private slider: Array<Slider>;
+  private slider: Array<any>;
   private url: string;
 
-  constructor(private storage: LocalStorage, private sld: SliderService) { }
+  constructor(private storage: LocalStorage, private sld: SliderService, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.url = server.url;
@@ -34,6 +34,27 @@ export class ListSliderComponent implements OnInit {
       response => {
         if (response.slide) {
           this.slider = response.slide;
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getTitle(title, id) {
+    this.slider.map((slide) => {
+      // tslint:disable-next-line:no-unused-expression
+      slide._id === id ? slide.title = title : slide.title;
+    });
+  }
+
+  updateSlider(data, id) {
+    this.sld.updateSlider(data, id, this.token).subscribe(
+      response => {
+        if (response.dataUpdated) {
+          this.getTitle(response.dataUpdated.title, id);
+          this.formComponent.message = 'Se ha actualizado correctamente';
         }
       },
       error => {

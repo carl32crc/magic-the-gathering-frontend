@@ -1,15 +1,13 @@
-import { Http, Headers, Request, Response, RequestOptions } from '@angular/http';
-import { CollectionChangeRecord, Injectable } from '@angular/core';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { server } from './../../constants/server.constants';
-import { LocalStorage } from './../../utils/local-storage';
 
 @Injectable()
 export class SliderService {
   private url: string;
-  headers: Headers = new Headers();
 
   constructor(private http: Http) {
     this.url = server.url;
@@ -34,6 +32,17 @@ export class SliderService {
 
     return this.http.get( `${this.url}slider`, { headers: headers })
                 .map(res => res.json());
+  }
+
+  updateSlider(slider, id, token) {
+    const params = JSON.stringify(slider);
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    });
+
+    return this.http.put(`${this.url}update-slider/${id}`, params, {headers: headers})
+            .map(res => res.json());
   }
 
   uploadImage (url: string, image, headers: Headers = new Headers()) {

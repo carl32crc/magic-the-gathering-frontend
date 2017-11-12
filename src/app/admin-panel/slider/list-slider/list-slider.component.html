@@ -11,9 +11,11 @@
       <div class="card-body">
           <mtg-form [date]="slide.date" 
                     [title]="slide.title" 
-                    [subtitle]="slide.title"
+                    [subtitle]="slide.subtitle"
                     [imageDb]="slide.image"
                     [update]="true"
+                    (delete)="deleteSlider(slide._id)"
+                    (action)="updateSlider($event, slide._id)"
                     (imageUpdate)="uploadImage($event, slide._id)"></mtg-form>
       </div>
     </div>
