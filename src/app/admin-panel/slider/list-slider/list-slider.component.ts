@@ -4,7 +4,6 @@ import { Slider } from '../../models/slider.interface';
 import { LocalStorage } from './../../../utils/local-storage';
 import { SliderService } from '../../services/slider.service';
 import { server } from './../../../constants/server.constants';
-import { FormComponent } from '../form/form.component';
 
 
 @Component({
@@ -15,7 +14,6 @@ import { FormComponent } from '../form/form.component';
 })
 export class ListSliderComponent implements OnInit {
 
-  @ViewChild(FormComponent) formComponent: FormComponent;
   private isModalVisible: boolean;
   private success = false;
   private message: string;
@@ -45,19 +43,27 @@ export class ListSliderComponent implements OnInit {
     );
   }
 
-  getTitle(title, id) {
+  updatedTitle(title, id) {
     this.slider.map((slide) => {
       // tslint:disable-next-line:no-unused-expression
       slide._id === id ? slide.title = title : slide.title;
     });
   }
 
-  updateSlider(data, id) {
-    this.sld.updateSlider(data, id, this.token).subscribe(
+  updatedImage(image, id) {
+    this.slider.map((slide) => {
+      if (slide._id === id) {
+        slide.image = image;
+      }
+    });
+  }
+
+  updateSlider(event, id) {
+    this.sld.updateSlider(event.value, id, this.token).subscribe(
       response => {
         if (response.dataUpdated) {
-          this.getTitle(response.dataUpdated.title, id);
-          this.formComponent.message = 'Se ha actualizado correctamente';
+          this.updatedTitle(response.dataUpdated.title, id);
+          event.formComponent.message = 'Se ha actualizado correctamente';
         }
       },
       error => {
@@ -66,7 +72,8 @@ export class ListSliderComponent implements OnInit {
     );
   }
 
-  uploadImage(imageFile, id) {
+  uploadImage(formComponent, id) {
+    const imageFile = formComponent.image;
     const headers = new Headers();
     headers.delete('Content-Type');
     headers.set('Authorization', this.token);
@@ -74,13 +81,13 @@ export class ListSliderComponent implements OnInit {
     if (imageFile[0].type === 'image/png' || imageFile[0].type === 'image/jpeg') {
       this.sld.uploadImage(`${this.url}upload-slider-image/${id}`, imageFile , headers).subscribe(
         response => {
-          this.formComponent.imageDb = response.image;
-          this.formComponent.message = 'La imagen se ha cambiado';
+          this.updatedImage(response.image, id);
+          formComponent.message = 'La imagen se ha cambiado';
         },
         error => { console.log(error); }
       );
     } else {
-      this.formComponent.message = 'Debes de añadir una imagen .jpg o .png';
+      formComponent.message = 'Debes de añadir una imagen .jpg o .png';
     }
   }
 

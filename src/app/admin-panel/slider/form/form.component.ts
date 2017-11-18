@@ -18,7 +18,7 @@ export class FormComponent implements OnInit {
   @Input() date;
   @Input() imageDb;
   @Input() update;
-  @Output() action = new EventEmitter<Slider>();
+  @Output() action = new EventEmitter<any>();
   @Output() imageUpdate = new EventEmitter<any>();
   @Output() deleteSlider = new EventEmitter<any>();
   private slider: FormGroup;
@@ -47,7 +47,7 @@ export class FormComponent implements OnInit {
   changeImage(file: any) {
     this.image = <Array<File>>file.target.files;
     if (this.update) {
-      this.imageUpdate.emit(this.image);
+      this.imageUpdate.emit(this);
     }
   }
 
@@ -60,7 +60,7 @@ export class FormComponent implements OnInit {
     if ((this.image && (this.image[0].type === 'image/png' || this.image[0].type === 'image/jpeg')) || this.update ) {
       value.date = eventDate(value.date);
       if (this.update) {
-        this.action.emit(value);
+        this.action.emit({formComponent: this, value: value});
       } else {
         value.image = this.image;
         this.action.emit(value);
